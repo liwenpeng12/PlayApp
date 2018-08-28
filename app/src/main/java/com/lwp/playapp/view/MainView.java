@@ -1,6 +1,7 @@
 package com.lwp.playapp.view;
 
 import com.lwp.playapp.base.BaseView;
+import com.lwp.playapp.model.ArticalBean;
 import com.lwp.playapp.model.BannerBean;
 
 /**
@@ -9,7 +10,7 @@ import com.lwp.playapp.model.BannerBean;
  * Email:1074762678@qq.com
  */
 public interface MainView extends BaseView{
-    void GetArticalSuccess();
+    void GetArticalSuccess(ArticalBean bean);
     void GetArticalFail();
 
     void GetBannerSuccess(BannerBean bannerBean);

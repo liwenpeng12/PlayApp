@@ -36,4 +36,8 @@ public interface Api {
     @GET("banner/json")
     Observable<BannerBean> getBanner();
 
+    //首页文章
+    @GET("article/list/{path}/json")
+    Observable<ArticalBean> getArtical(@Path("path") int path);
+
 }

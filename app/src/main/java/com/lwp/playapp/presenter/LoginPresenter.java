@@ -7,6 +7,8 @@ import com.lwp.playapp.http.Api;
 import com.lwp.playapp.http.ApiService;
 import com.lwp.playapp.model.LoginBean;
 import com.lwp.playapp.model.RegisterBean;
+import com.lwp.playapp.util.Constant;
+import com.lwp.playapp.util.SpUtils;
 import com.lwp.playapp.view.LoginView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,8 +34,11 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             @Override
             public void accept(LoginBean loginBean) throws Exception {
                 if (null != loginBean.getData()){
+                    SpUtils.putString(mContext, Constant.USERNAME,loginBean.getData().getUsername());
+                    SpUtils.putString(mContext,Constant.PASSWORD,loginBean.getData().getPassword());
                     mView.closeLoadingDialog("操作成功");
                     mView.onLoginSuccess(loginBean);
+
                 }else {
                     mView.closeLodingFail("未能成功");
                 }

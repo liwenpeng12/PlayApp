@@ -10,11 +10,16 @@ buildscript {
     ext.rxandroid_version = '2.1.0'
     ext.glide_version = '4.8.0'
     ext.banner_version = '1.4.10'
+    ext.sonic_version = '3.0.0'
+    ext.leakcanary_version = '1.6.1'
+    ext.basequickadapter_version = '2.9.30'
+    ext.htextview_version = '0.1.6'
 
 
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
@@ -29,6 +34,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 

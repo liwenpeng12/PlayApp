@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.lwp.playapp.model.LoginBean;
 import com.lwp.playapp.model.RegisterBean;
+import com.squareup.leakcanary.LeakCanary;
 
 
 /**
@@ -23,7 +24,7 @@ public class LApplication extends Application {
 
 
     public static Context getContext(){
-        return LApplication.getContext();
+        return instance.getApplicationContext();
     }
 
     public static LApplication getApp(){
@@ -34,6 +35,7 @@ public class LApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        LeakCanary.install(this);
     }
 
 }

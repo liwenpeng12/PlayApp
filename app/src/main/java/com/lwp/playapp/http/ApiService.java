@@ -1,5 +1,12 @@
 package com.lwp.playapp.http;
 
+import android.content.Context;
+
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.lwp.playapp.base.LApplication;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -22,6 +29,8 @@ public class ApiService {
     private Retrofit retrofit;
     private OkHttpClient client;
 
+
+
     private static class SingletonHolder {
         private static final ApiService INSTANCE = new ApiService();
     }
@@ -35,6 +44,7 @@ public class ApiService {
                 //.addInterceptor(new HeaderInterceptor())
                 //添加日志打印拦截器
                 .addInterceptor(new RequestLogInterceptor())
+                .cookieJar(new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(LApplication.getContext())))
                 .build();
 
         retrofit = new Retrofit.Builder()

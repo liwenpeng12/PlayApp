@@ -13,6 +13,8 @@ import com.lwp.playapp.base.LApplication;
 import com.lwp.playapp.model.LoginBean;
 import com.lwp.playapp.model.RegisterBean;
 import com.lwp.playapp.presenter.LoginPresenter;
+import com.lwp.playapp.util.Constant;
+import com.lwp.playapp.util.SpUtils;
 import com.lwp.playapp.view.LoginView;
 
 import butterknife.BindView;
@@ -45,7 +47,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected void initData() {
-
+        String username = SpUtils.getString(mContext, Constant.USERNAME, "");
+        String password = SpUtils.getString(mContext, Constant.PASSWORD, "");
+        if (!isLEmpty(username) && !isLEmpty(password)){
+            etUsername.setText(username);
+            etPassword.setText(password);
+            btnLogin.performClick();
+        }
     }
 
     @Override

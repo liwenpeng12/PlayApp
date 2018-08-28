@@ -6,6 +6,7 @@ import android.util.Log;
 import com.lwp.playapp.base.BasePresenter;
 import com.lwp.playapp.http.Api;
 import com.lwp.playapp.http.ApiService;
+import com.lwp.playapp.model.ArticalBean;
 import com.lwp.playapp.model.BannerBean;
 import com.lwp.playapp.view.MainView;
 
@@ -44,7 +45,24 @@ public class MainPresenter extends BasePresenter<MainView> {
         }));
     }
 
-    public void getArtical(){
-
+    public void getArtical(int page){
+        mView.showLoadingDialog();
+        addSubscribe(ApiService.getInstance().createService(Api.class).getArtical(page).subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ArticalBean>() {
+                    @Override
+                    public void accept(ArticalBean articalBean) throws Exception {
+                        if (null != articalBean.getData()){
+                            mView.closeLoadingDialog("操作成功");
+                            mView.GetArticalSuccess(articalBean);
+                        }else {
+                            mView.closeLodingFail("未能成功");
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        mView.closeLodingFail("操作失败");
+                    }
+                }));
     }
 }

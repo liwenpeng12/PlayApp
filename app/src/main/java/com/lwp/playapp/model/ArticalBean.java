@@ -1,5 +1,9 @@
 package com.lwp.playapp.model;
 
+import android.text.TextUtils;
+
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.List;
 
 /**
@@ -42,6 +46,8 @@ public class ArticalBean {
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
+
+
 
     public static class DataBean {
         /**
@@ -118,7 +124,8 @@ public class ArticalBean {
             this.datas = datas;
         }
 
-        public static class DatasBean {
+
+        public static class DatasBean implements MultiItemEntity{
             /**
              * apkLink :
              * author : 钉某人
@@ -351,6 +358,15 @@ public class ArticalBean {
 
             public void setTags(List<?> tags) {
                 this.tags = tags;
+            }
+
+            @Override
+            public int getItemType() {
+                if (TextUtils.isEmpty(getEnvelopePic())){
+                    return 0;//无图
+                }else {
+                    return 1;//有图
+                }
             }
         }
     }
